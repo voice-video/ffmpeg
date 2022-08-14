@@ -20,5 +20,8 @@
 ffmpeg -i test.mp4 -acodec copy -vcodec libx264 -s 1280*1270 test.flv
 ```
 
+<img width="951" alt="image" src="https://user-images.githubusercontent.com/17528531/184559156-be8dba90-0205-4bdd-ba5d-cc0cafd649b1.png">
+
+
 
 
