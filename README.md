@@ -31,13 +31,16 @@ ffmpeg {1} {2} -i {3} {4} {5}
 例如：
 ```ssh
 <!-- -i 输入 -->
-<!-- -acodec 音频编解码器 -->
-<!-- -vcodec 视频编码器用x264 -->
-ffmpeg -i test.mp4 -acodec copy -vcodec libx264 -s 1280*1270 test.flv
+<!-- -acodec 音频编解码器 audio-->
+<!-- -vcodec 视频编码器用x264 video-->
+ffmpeg -i test.mp4 -acodec copy -vcodec libx264 -s 1280x720 test.flv
+
+
+-c:v：指定视频编码器 / -vcodec 两者效果一样
+-c:a：指定音频编码器 / -acodec 两者效果一样
+
+ffmpeg -i test.mp4 -c:a copy -c:v libx264 -s 12800x720 test.flv
 ```
 
 <img width="951" alt="image" src="https://user-images.githubusercontent.com/17528531/184559156-be8dba90-0205-4bdd-ba5d-cc0cafd649b1.png">
-
-
-
 
