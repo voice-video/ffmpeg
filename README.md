@@ -44,3 +44,24 @@ ffmpeg -i test.mp4 -c:a copy -c:v libx264 -s 12800x720 test.flv
 
 <img width="951" alt="image" src="https://user-images.githubusercontent.com/17528531/184559156-be8dba90-0205-4bdd-ba5d-cc0cafd649b1.png">
 
+
+**查看添加水印，文字等**
+```
+ffmpeg -filters 
+```
+
+**查看是否支持x264的编码**
+```
+ffmpeg -encoders | findstr x264
+```
+
+**ffmpeg制作跑马灯效果**
+```
+ffplay -i input.mp4 -vf "movie=logo.png[watermark];[in][watermark]overlay=x=mod(50*t\,main_w):y=abs(sin(t))*h*0.7[out]"
+```
+
+**画中画**
+> 画中画也可以支持跑马灯效果
+
+
+**多宫格**
