@@ -33,6 +33,7 @@ ffmpeg {1} {2} -i {3} {4} {5}
 <!-- -i 输入 -->
 <!-- -acodec 音频编解码器 audio-->
 <!-- -vcodec 视频编码器用x264 video-->
+<!-- -s [：stream_specifier]大小（输入/输出，每个流） 设置窗口大小-->
 ffmpeg -i test.mp4 -acodec copy -vcodec libx264 -s 1280x720 test.flv
 
 
