@@ -86,17 +86,6 @@ ffmpeg -i [输入文件名] [参数选项] -f [格式] [输出文件]
 ffmpeg -encoders | findstr x264
 ```
 
-**ffmpeg制作跑马灯效果**
-```
-ffplay -i input.mp4 -vf "movie=logo.png[watermark];[in][watermark]overlay=x=mod(50*t\,main_w):y=abs(sin(t))*h*0.7[out]"
-```
-
-**画中画**
-> 画中画也可以支持跑马灯效果
-
-
-**多宫格**
-
 
 **提取YUV数据**
 ```
@@ -202,3 +191,31 @@ ffmpeg -f gif -i img.gif  test.mp4
 ```
 
 
+**视频裁剪**
+- 图片裁剪
+```
+// 0:0 表示起始坐标， iw/3 表示宽度的1/3
+ffmpeg -i input.jpg -vf crop=iw/3:ih:0:0 out.jpg
+
+ffplay -i input.jpg -vf crop=iw/3:ih:0:0 // 可以清楚的看到截出的效果
+```
+- 视频裁剪
+> 和上面一样
+
+**过滤器-文字水印**
+
+
+
+**过滤器-图片水印**
+
+
+**ffmpeg制作跑马灯效果**
+```
+ffplay -i input.mp4 -vf "movie=logo.png[watermark];[in][watermark]overlay=x=mod(50*t\,main_w):y=abs(sin(t))*h*0.7[out]"
+```
+
+**画中画**
+> 画中画也可以支持跑马灯效果
+
+
+**多宫格**
