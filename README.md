@@ -251,6 +251,7 @@ FFmpeg文字滤镜参数：
 `ffplay -i input.mp4 -vf "drawtext=fontsize=40:fontfile=FreeSerif.ttf:text='liaoqingfu':x=mod(50*t\,w):y=abs(sin(t))*h*0.7:alpha=0.5:fontcolor=white:enable=lt(mod(t\,3)\,1)"`
 2. 图片水印
 FFmpeg除了可以向视频添加文字水印之外，还可以向视频添加图片水印、视频跑马灯等，本节将重点介绍如何为视频添加图片水印；为视频添加图片水印可以使用movie滤镜，下面就来熟悉一下movie滤镜的参数，如表1-5所示。
+
 表1-5 FFmpeg movie滤镜的参数
 
 |参数	|类型	|说明|
@@ -305,6 +306,7 @@ overlay过滤器:
 |右下角	|main_w-overlay_w-10:main_h-overlay_h-10|
 
 在FFmpeg中加入图片水印有两种方式，一种是通过movie指定水印文件路径，另外一种方式是通过filter读取输入文件的流并指定为水印，这里重点介绍如何读取movie图片文件作为水印。
+
 （1）图片logo.png将会打入到input.mp4视频中，显示在x坐标50、y坐标20的位置
 
 `ffplay -i input.mp4 -vf "movie=logo.png[logo];[in][logo]overlay=50:10[out]"`
@@ -364,6 +366,7 @@ ffplay -i input.mp4 -vf "movie=sub_320x240.mp4[sub];[in][sub]overlay=x=20:y=20:s
  
 4. FFmpeg视频多宫格处理
 视频除了画中画显示，还有一种场景为以多宫格的方式呈现出来，除了可以输入视频文件，还可以输入视频流、采集设备等。从前文中可以看出进行视频图像处理时，overlay滤镜为关键画布，可以通过FFmpeg建立一个画布，也可以使用默认的画布。如果想以多宫格的方式展现，则可以自己建立一个足够大的画布，下面就来看一下多宫格展示的例子：
+
 ffmpeg -i 1.mp4 -i 2.mp4 -i  3.mp4 -i  4.mp4 -filter_complex "nullsrc=size=640x480[base];[0:v] setpts=PTS-STARTPTS,scale=320x240[upperleft];[1:v]setpts=PTS-STARTPTS,scale=320x240[upperright];[2:v]setpts=PTS-STARTPTS, scale=320x240[lowerleft];[3:v]setpts=PTS-STARTPTS,scale=320x240[lowerright];[base][upperleft]overlay=shortest=1[tmp1];[tmp1][upperright]overlay=shortest=1:x=320[tmp2];[tmp2][lowerleft]overlay=shortest=1:y=240[tmp3];[tmp3][lowerright]overlay=shortest=1:x=320:y=240" out.mp4
  
 1.2.3.4.mp4为文件路径，out.MP4为输出文件路径，通过nullsrc创建overlay画布，画布大小640:480,
