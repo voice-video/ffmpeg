@@ -190,6 +190,18 @@ ffmpeg -i test.mp4 -t 5 -r 1 img.gif
 ffmpeg -f gif -i img.gif  test.mp4
 ```
 
+
+**视频裁剪**
+- 图片裁剪
+```
+// 0:0 表示起始坐标， iw/3 表示宽度的1/3
+ffmpeg -i input.jpg -vf crop=iw/3:ih:0:0 out.jpg
+
+ffplay -i input.jpg -vf crop=iw/3:ih:0:0 // 可以清楚的看到截出的效果
+```
+- 视频裁剪
+> 和上面一样
+
 **添加水印**
 1. 文字水印
 在视频中增加文字水印需要准备的条件比较多，需要有文字字库处理的相关文件，在编译FFmpeg时需要支持FreeType、FontConfig、iconv，系统中需要有相关的字库，在FFmpeg中增加纯字母水印可以使用drawtext滤镜进行支持，下面就来看一下drawtext的滤镜参数，具体见下表。
@@ -364,33 +376,3 @@ ffmpeg -i 1.mp4 -i 2.mp4 -i  3.mp4 -i  4.mp4 -filter_complex "nullsrc=size=640x4
 
 只叠加左上右上的命令：
 `ffmpeg -i 1.mp4 -i 2.mp4 -i  3.mp4 -i  4.mp4 -filter_complex "nullsrc=size=640x480[base];[0:v]setpts=PTS-STARTPTS,scale=320x240[upperleft];[1:v]setpts=PTS-STARTPTS,scale=320x240[upperright];[base][upperleft]overlay=shortest=1[tmp1];[tmp1][upperright]overlay=shortest=1:x=320" out2.mp4`
-
-
-**视频裁剪**
-- 图片裁剪
-```
-// 0:0 表示起始坐标， iw/3 表示宽度的1/3
-ffmpeg -i input.jpg -vf crop=iw/3:ih:0:0 out.jpg
-
-ffplay -i input.jpg -vf crop=iw/3:ih:0:0 // 可以清楚的看到截出的效果
-```
-- 视频裁剪
-> 和上面一样
-
-**过滤器-文字水印**
-
-
-
-**过滤器-图片水印**
-
-
-**ffmpeg制作跑马灯效果**
-```
-ffplay -i input.mp4 -vf "movie=logo.png[watermark];[in][watermark]overlay=x=mod(50*t\,main_w):y=abs(sin(t))*h*0.7[out]"
-```
-
-**画中画**
-> 画中画也可以支持跑马灯效果
-
-
-**多宫格**
